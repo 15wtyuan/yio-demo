@@ -498,10 +498,14 @@ h3 {
 }
 
 .frame-shell iframe {
-  width: 100%;
-  height: 100%;
+  /* 固定按 1920×1080 渲染（与 Unity 实机同源同构），显示缩放由 app.js 按壳宽等比计算——
+     demo 页是响应式布局，若让 iframe 随壳自适应，元素 px 尺寸不变而 % 定位随视口摊开，
+     比例就会和 Unity 截图对不上。 */
+  width: 1920px;
+  height: 1080px;
   border: 0;
   background: #e9ddbf;
+  transform-origin: top left;
 }
 
 .demo-caption {
@@ -748,37 +752,72 @@ h3 {
   gap: 18px;
 }
 
-.shot-placeholder {
+.shot-card {
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  min-height: 280px;
-  padding: 26px;
-  border: 1px dashed rgba(141, 185, 189, 0.34);
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--line);
   border-radius: 15px;
-  background: repeating-linear-gradient(135deg, rgba(164,71,56,0.035) 0, rgba(164,71,56,0.035) 12px, transparent 12px, transparent 24px);
+  background-color: rgba(4, 17, 15, 0.76);
 }
 
-.shot-placeholder:first-child {
+.shot-card:first-child {
   grid-row: span 2;
-  min-height: 578px;
 }
 
-.shot-placeholder span {
-  margin-bottom: auto;
-  color: #516d73;
-  font-family: "Cascadia Code", monospace;
-  font-size: 10px;
-  letter-spacing: 0.14em;
+.shot-card img {
+  display: block;
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  object-fit: contain;
+  background-color: #04100f;
 }
 
-.shot-placeholder strong {
-  font-size: 20px;
+.shot-card figcaption {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  padding: 14px 20px;
+  border-top: 1px solid var(--line);
 }
 
-.shot-placeholder small {
-  margin-top: 7px;
+.shot-card strong {
+  font-size: 18px;
+}
+
+.shot-card small {
   color: var(--faint);
+}
+
+.shot-card img {
+  cursor: zoom-in;
+}
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4vh 4vw;
+  background: rgba(6, 12, 10, 0.92);
+  cursor: zoom-out;
+}
+
+.lightbox[hidden] {
+  display: none;
+}
+
+.lightbox img {
+  max-width: 100%;
+  max-height: 100%;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background-color: #04100f;
 }
 
 .closing {
@@ -864,13 +903,11 @@ h3 {
   .demo-tab { white-space: nowrap; }
   .demo-state { display: none; }
   .demo-stage { padding: 8px; }
-  .frame-shell { aspect-ratio: 16 / 10; overflow: auto; }
-  .frame-shell iframe { width: 1100px; height: 619px; transform: scale(0.56); transform-origin: top left; }
   .demo-caption { align-items: flex-start; flex-direction: column; gap: 8px; }
   .innovation-row { grid-template-columns: 40px 1fr; gap: 14px; }
   .innovation-row p { grid-column: 2; }
   .runtime-grid { grid-template-columns: 1fr; }
-  .shot-placeholder:first-child { grid-row: auto; min-height: 280px; }
+  .shot-card:first-child { grid-row: auto; }
   .site-footer { align-items: flex-start; flex-direction: column; justify-content: center; gap: 12px; }
 }
 

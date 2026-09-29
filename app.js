@@ -1,4 +1,18 @@
 const demoFrame = document.querySelector("#demo-frame");
+const frameShell = document.querySelector(".frame-shell");
+
+// iframe 固定 1920×1080（styles.css），此处按壳宽等比缩放显示——评审站嵌入画面与
+// Unity 1920×1080 实机截图保持比例同构（理由见 styles.css .frame-shell iframe 注释）。
+const DEMO_WIDTH = 1920;
+
+function fitDemoFrame() {
+  if (!frameShell || !demoFrame) return;
+  demoFrame.style.transform = `scale(${frameShell.clientWidth / DEMO_WIDTH})`;
+}
+
+window.addEventListener("resize", fitDemoFrame);
+fitDemoFrame();
+
 const demoTitle = document.querySelector("#demo-title");
 const demoDescription = document.querySelector("#demo-description");
 const openDemo = document.querySelector("#open-demo");
@@ -66,4 +80,25 @@ const revealObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.12 });
 
 document.querySelectorAll(".reveal").forEach((element) => revealObserver.observe(element));
+
+// Unity 实机截图：点击卡片放大预览，点击遮罩任意处 / Esc 关闭。
+const lightbox = document.querySelector("#lightbox");
+const lightboxImg = document.querySelector("#lightbox-img");
+
+document.querySelectorAll(".shot-card img").forEach((img) => {
+  img.addEventListener("click", () => {
+    lightboxImg.src = img.src;
+    lightboxImg.alt = img.alt;
+    lightbox.hidden = false;
+  });
+});
+
+lightbox.addEventListener("click", () => {
+  lightbox.hidden = true;
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && !lightbox.hidden) lightbox.hidden = true;
+});
+
 loadSource("main");

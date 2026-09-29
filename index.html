@@ -204,14 +204,23 @@
       <div class="runtime-head reveal">
         <div>
           <p class="section-index">07 / Unity 实机</p>
-          <h2>预留真实运行时证据位。</h2>
+          <h2>真机运行证据，同一份源码。</h2>
         </div>
-        <p>当前电脑未安装 Unity，以下区域保留为实机截图占位。后续应替换为相同三页在 Unity 中运行的截图，并补充一段完整操作录屏。</p>
+        <p>以下为 Unity 6000.5 编辑器实机截图（Game 视图 1920×1080）：同一份 HTML/CSS 源，评审站嵌入预览与 Unity 运行画面同构；完整操作录屏随申报材料另行提交。</p>
       </div>
       <div class="runtime-grid">
-        <div class="shot-placeholder reveal"><span>UNITY CAPTURE 01</span><strong>主界面实机截图</strong><small>建议展示任务入口、动画与输入响应</small></div>
-        <div class="shot-placeholder reveal"><span>UNITY CAPTURE 02</span><strong>背包实机截图</strong><small>建议展示选择、滚动与类型化事件</small></div>
-        <div class="shot-placeholder reveal"><span>UNITY CAPTURE 03</span><strong>排行榜实机截图</strong><small>建议展示长列表与帧率信息</small></div>
+        <figure class="shot-card reveal">
+          <img src="assets/unity-main.png" alt="主界面在 Unity 编辑器中运行的实机截图">
+          <figcaption><strong>主界面 · 问星古道</strong><small>Unity 编辑器实机 · 场景化 HUD、任务入口与战斗快捷栏</small></figcaption>
+        </figure>
+        <figure class="shot-card reveal">
+          <img src="assets/unity-inventory.png" alt="背包在 Unity 编辑器中运行的实机截图">
+          <figcaption><strong>背包 · 百宝匣</strong><small>Unity 编辑器实机 · 分类导航、选中态与属性详情联动</small></figcaption>
+        </figure>
+        <figure class="shot-card reveal">
+          <img src="assets/unity-leaderboard.png" alt="排行榜在 Unity 编辑器中运行的实机截图">
+          <figcaption><strong>排行榜 · 问剑榜</strong><small>Unity 编辑器实机 · 长列表滚动与底部锁定行</small></figcaption>
+        </figure>
       </div>
     </section>
 
@@ -229,6 +238,10 @@
     <div class="wordmark-copy"><strong>Yio</strong><small>HTML CSS · RUST CORE · UNITY</small></div>
     <p>游戏图标来自 game-icons.net，按 CC BY 3.0 使用 · AI 大赛静态评审站 · 2026 年 9 月 29 日</p>
   </footer>
+
+  <div class="lightbox" id="lightbox" hidden>
+    <img id="lightbox-img" src="" alt="Unity 实机截图放大预览">
+  </div>
 
   <script src="app.js"></script>
 </body>
